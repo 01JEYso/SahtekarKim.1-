@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahtekar Kim?</title>
+    <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-text"></div>
+    <div id="audio-container"></div>
+
+    <div class="container">
+        <div id="lobby-screen" class="screen active">
+            <div class="card">
+                <button id="settings-btn" class="icon-btn" title="Mikrofon Ayarları">⚙️</button>
+                <h1>Sahtekar Kim?</h1>
+                <p class="subtitle">İsmini yaz ve bir karakter seçerek oyuna başla!</p>
+                <input type="text" id="player-name-input" placeholder="İsmini Gir" maxlength="15">
+                <div class="avatar-selection">
+                    <h3>Karakterini Seç</h3>
+                    <div id="avatar-grid" class="avatar-grid"></div>
+                </div>
+                <button id="create-room-btn">Oda Kur</button>
+                <hr>
+                <div class="join-room-container">
+                    <input type="text" id="room-code-input" placeholder="Oda Kodunu Gir" maxlength="4">
+                    <button id="join-room-btn">Odaya Katıl</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="room-settings-screen" class="screen">
+            <div class="card">
+                <button id="back-to-lobby-btn" class="icon-btn back-btn" title="Geri Dön">‹</button>
+                <h2>Oda Ayarları</h2>
+                <div class="setting-item">
+                    <label>Oyuncu Limiti</label>
+                    <div class="spinner-container">
+                        <button class="spinner-btn" data-input-id="player-limit-input" data-action="decrease">-</button>
+                        <input type="number" id="player-limit-input" value="8" min="3" max="10" readonly>
+                        <button class="spinner-btn" data-input-id="player-limit-input" data-action="increase">+</button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>Kazanma Puanı</label>
+                    <div class="spinner-container">
+                        <button class="spinner-btn" data-input-id="win-score-input" data-action="decrease">-</button>
+                        <input type="number" id="win-score-input" value="30" min="10" max="100" step="10" readonly>
+                        <button class="spinner-btn" data-input-id="win-score-input" data-action="increase">+</button>
+                    </div>
+                </div>
+                <button id="create-room-with-settings-btn">Odayı Kur</button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="card">
+                <div class="game-header">
+                    <h2 id="round-info">Lobi</h2>
+                    <div class="game-rules">
+                        <span id="player-count-info"></span>
+                        <span id="win-score-info"></span>
+                    </div>
+                    <h2>Oda Kodu: <span id="room-code-display"></span></h2>
+                </div>
+                <div id="game-info">
+                    <h3>Senin Ünlün: <span id="my-celebrity">Bekleniyor...</span></h3>
+                </div>
+                <p id="game-status"></p>
+                <div class="player-grid" id="player-grid-container"></div>
+                <div id="room-controls-container"></div>
+            </div>
+            <button id="mic-toggle-btn" class="mic-btn" title="Mikrofonu Aç">
+                <i class="fas fa-microphone-slash"></i>
+            </button>
+        </div>
+
+        <div id="results-screen" class="screen">
+             <div class="card">
+                <h2 id="result-title"></h2>
+                <p id="result-details"></p>
+                <button id="return-to-lobby-btn">Yeni Oyun</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content card">
+            <button id="close-settings-btn" class="icon-btn close-btn">✖</button>
+            <h2>Mikrofon Ayarları</h2>
+            <div class="setting-item">
+                <label for="mic-select">Giriş Cihazı:</label>
+                <select id="mic-select" class="custom-select"></select>
+            </div>
+            <div class="setting-item">
+                <label>Mikrofon Testi:</label>
+                <div class="mic-test-bar-container">
+                    <div id="mic-test-bar"></div>
+                </div>
+            </div>
+            <div class="setting-item">
+                <label for="noise-suppression-toggle">Gürültü Engelleme:</label>
+                <label class="switch">
+                    <input type="checkbox" id="noise-suppression-toggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div id="custom-alert-modal" class="modal-overlay hidden">
+        <div class="modal-content card">
+            <h2 id="custom-alert-title"></h2>
+            <p id="custom-alert-message"></p>
+            <div id="custom-alert-buttons" class="custom-alert-buttons"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
