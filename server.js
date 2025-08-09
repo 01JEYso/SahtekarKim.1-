@@ -9,193 +9,8 @@ const io = new Server(server);
 app.use(express.static('public'));
 const PORT = process.env.PORT || 3000;
 
-Elbette, anladım. Ünlü listesini gerçekten devasa bir hale getirelim ki oyunun tekrar oynanabilirliği maksimuma çıksın. Senin için tüm kategorileri, özellikle de müzik, futbol ve internet dünyasını daha da genişleterek yüzlerce çiftten oluşan yeni bir liste hazırladım.
-
-Bu, muhtemelen ihtiyacın olacak en kalabalık liste. Tek yapman gereken aşağıdaki server.js kodunu projedeki dosyanla tamamen değiştirmek.
-
-server.js Dosyasının Devasa Ünlü Listesiyle Final Hali
-server.js dosyanın içindeki tüm metni sil ve aşağıdaki tam ve güncellenmiş kodun tamamını bu boş dosyaya yapıştır.
-
-JavaScript
-
-const express = require('express');
-const http = require('http');
-const { Server } = require("socket.io");
-
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
-
-app.use(express.static('public'));
-const PORT = process.env.PORT || 3000;
-
-// --- DEVASA VE KATEGORİLERE AYRILMIŞ FİNAL ÜNLÜ LİSTESİ ---
 const celebrityPairs = [
-    // === MÜZİK DÜNYASI ===
-    // Yeni Nesil & Gündemdeki Müzisyenler (Rap, Pop)
-    ["Lvbel C5", "Çakal"],
-    ["Uzi", "Reckol"],
-    ["Sefo", "Murda"],
-    ["Blok3", "Motive"],
-    ["Heijan", "Muti"],
-    ["Semincenk", "Can Koç"],
-    ["Mero", "Ezhel"],
-    ["Gazapizm", "Ceza"],
-    ["Sagopa Kajmer", "Killa Hakan"],
-    ["Norm Ender", "Ben Fero"],
-    ["Güneş", "Lil Zey"],
-    ["Mert Demir", "Mabel Matiz"],
-    ["Köfn", "Madrigal"],
-    ["Can Ozan", "Emir Can İğrek"],
-    ["Irmak Arıcı", "Tuğçe Kandemir"],
-    ["BEGE", "Batuflex"],
-    ["Patron", "Şehinşah"],
-
-    // Popüler Pop Müzik Sanatçıları
-    ["Edis", "Buray"],
-    ["Tarkan", "Murat Boz"],
-    ["Mustafa Sandal", "Kenan Doğulu"],
-    ["Serdar Ortaç", "Sinan Akçıl"],
-    ["Yalın", "Gökhan Özen"],
-    ["Oğuzhan Koç", "Murat Dalkılıç"],
-    ["Aleyna Tilki", "Zeynep Bastık"],
-    ["Gülşen", "Hande Yener"],
-    ["Demet Akalın", "Bengü"],
-    ["Sıla", "Göksel"],
-    ["Melek Mosso", "Melike Şahin"],
-    ["Simge Sağın", "Merve Özbey"],
-    ["İrem Derici", "Aynur Aydın"],
-    ["Hadise", "Ebru Yaşar"],
-    ["Zerrin Özer", "Nükhet Duru"],
-
-    // Arabesk ve Fantezi Müziğin Efsaneleri
-    ["Müslüm Gürses", "Ferdi Tayfur"],
-    ["İbrahim Tatlıses", "Orhan Gencebay"],
-    ["Hakan Altun", "Serkan Kaya"],
-    ["Ebru Gündeş", "Sibel Can"],
-    ["Cengiz Kurtoğlu", "Ümit Besen"],
-    ["Yıldız Tilbe", "Işın Karaca"],
-    ["Mahsun Kırmızıgül", "Özcan Deniz"],
-    ["Alişan", "Ceylan"],
-    ["Neşet Ertaş", "Aşık Veysel"],
-    
-    // Rock ve Alternatif Müzik
-    ["Teoman", "Haluk Levent"],
-    ["Duman", "Mor ve Ötesi"], 
-    ["Manga", "Athena"],
-    ["Can Bonomo", "Hayko Cepkin"],
-    ["Adamlar", "Büyük Ev Ablukada"],
-    ["Yüzyüzeyken Konuşuruz", "Dolu Kadehi Ters Tut"],
-    ["Erkin Koray", "Barış Akarsu"],
-    ["Şebnem Ferah", "Özlem Tekin"],
-    ["Pentagram", "Kurban"],
-    
-    // Müzik Dünyasının Duayenleri
-    ["Sezen Aksu", "Sertab Erener"],
-    ["Ajda Pekkan", "Nilüfer"],
-    ["Barış Manço", "Cem Karaca"],
-    ["MFÖ", "Yeni Türkü"],
-    ["Kayahan", "Fikret Kızılok"],
-    
-    // === FUTBOL DÜNYASI ===
-    // Güncel ve Popüler Futbolcular
-    ["Arda Güler", "Can Uzun"],
-    ["Hakan Çalhanoğlu", "Kerem Demirbay"],
-    ["Kerem Aktürkoğlu", "Barış Alper Yılmaz"],
-    ["İrfan Can Kahveci", "Yusuf Yazıcı"],
-    ["Ferdi Kadıoğlu", "İsmail Yüksek"],
-    ["Abdülkerim Bardakcı", "Kaan Ayhan"],
-    ["Cenk Tosun", "Semih Kılıçsoy"],
-    ["Cengiz Ünder", "Yunus Akgün"],
-    ["Orkun Kökçü", "Salih Özcan"],
-    ["Mert Hakan Yandaş", "Taylan Antalyalı"],
-    ["Samet Akaydın", "Ozan Kabak"],
-
-    // Süper Lig Popüler Yabancılar
-    ["Fernando Muslera", "Uğurcan Çakır"],
-    ["Mauro Icardi", "Edin Dzeko"],
-    ["Dries Mertens", "Sebastian Szymanski"],
-    ["Gedson Fernandes", "Fred"],
-    ["Dusan Tadic", "Hakim Ziyech"],
-    ["Altay Bayındır", "Dominik Livaković"],
-    ["Vincent Aboubakar", "Michy Batshuayi"],
-    ["Lucas Torreira", "Alexander Djiku"],
-
-    // Efsane Futbolcular (Yerli)
-    ["Sergen Yalçın", "Yusuf Şimşek"],
-    ["Rüştü Reçber", "Volkan Demirel"],
-    ["Hakan Şükür", "Burak Yılmaz"],
-    ["Arda Turan", "Emre Belözoğlu"],
-    ["Bülent Korkmaz", "Alpay Özalan"],
-    ["Ümit Davala", "Hasan Şaş"],
-    ["Tuncay Şanlı", "Nihat Kahveci"],
-    ["İlhan Mansız", "Pascal Nouma"],
-    ["Tugay Kerimoğlu", "Okan Buruk"],
-    ["Metin Oktay", "Lefter Küçükandonyadis"],
-    
-    // Efsane Futbolcular (Yabancı)
-    ["Alex de Souza", "Gheorghe Hagi"],
-    ["Ricardo Quaresma", "Guti Hernández"],
-    ["Didier Drogba", "Mario Jardel"],
-    ["Roberto Carlos", "Gökhan Gönül"],
-    ["Felipe Melo", "Selçuk İnan"],
-    ["Atiba Hutchinson", "Josef de Souza"],
-    ["Mario Gomez", "Demba Ba"],
-    ["Pierre van Hooijdonk", "Dirk Kuyt"],
-    ["Gheorghe Popescu", "Frank de Boer"],
-
-    // Teknik Direktörler ve Yorumcular
-    ["Fatih Terim", "Mustafa Denizli"],
-    ["Sergen Yalçın", "Yılmaz Vural"],
-    ["Okan Buruk", "Abdullah Avcı"],
-    ["Vincenzo Montella", "Şenol Güneş"],
-    ["Rıdvan Dilmen", "Erman Toroğlu"],
-    ["Güntekin Onay", "Murat Kosova"],
-
-    // === SİNEMA & DİZİ DÜNYASI ===
-    // Popüler Oyuncular (Kadın)
-    ["Hande Erçel", "Demet Özdemir"],
-    ["Serenay Sarıkaya", "Fahriye Evcen"],
-    ["Afra Saraçoğlu", "Sıla Türkoğlu"],
-    ["Beren Saat", "Tuba Büyüküstün"],
-    ["Hazal Kaya", "Alina Boz"],
-    ["Pınar Deniz", "Cemre Baysel"],
-    ["Burcu Biricik", "Aslı Enver"],
-    ["Özge Özpirinçci", "Gupse Özay"],
-    ["Elçin Sangu", "Melisa Şenolsun"],
-    ["Ayça Ayşin Turan", "Özge Gürel"],
-    ["Miray Daner", "Su Burcu Yazgı Coşkun"],
-    ["Mine Tugay", "Gökçe Bahadır"],
-    ["Eda Ece", "Şevval Sam"],
-    ["Melis Sezen", "Büşra Develi"],
-    ["Hafsanur Sancaktutan", "Deniz Baysal"],
-    ["Birce Akalay", "Nur Fettahoğlu"],
-    ["Evrim Alasya", "Ceren Karakoç"],
-    ["Damla Sönmez", "Aslıhan Gürbüz"],
-    ["Ezgi Mola", "Aylin Kontente"],
-    ["Cansu Dere", "Tuba Ünsal"],
-
-    // Popüler Oyuncular (Erkek)
-    ["Kıvanç Tatlıtuğ", "Çağatay Ulusoy"],
-    ["Kenan İmirzalıoğlu", "Burak Özçivit"],
-    ["Mert Ramazan Demir", "Kubilay Aka"],
-    ["Aras Bulut İynemli", "Can Yaman"],
-    ["Engin Akyürek", "İlker Kaleli"],
-    ["Barış Arduç", "Alp Navruz"],
-    ["Salih Bademci", "Metin Akdülger"],
-    ["Uraz Kaygılaroğlu", "Onur Tuna"],
-    ["Kerem Bürsin", "Serkan Çayoğlu"],
-    ["Çağlar Ertuğrul", "Deniz Can Aktaş"],
-    ["Doğukan Güngör", "Barış Kılıç"],
-    ["Kaan Urgancıoğlu", "Yiğit Özşener"],
-    ["Buğra Gülsoy", "Serhat Teoman"],
-    ["Ahmet Kural", "Murat Cemcir"],
-     
-    // Sunucular ve TV Yüzleri
-    ["Beyazıt Öztürk", "Acun Ilıcalı"],
-    ["Müge Anlı", "Esra Erol"],
-    ["İbrahim Selim", "Kaan Sekban"],
-    
+    // === İNTERNET, EKRAN & MİZAH DÜNYASI ===
     // Twitch Yayıncıları
     ["Jahrein (Ahmet Sonuç)", "Elraenn (Tuğkan Gönültaş)"],
     ["Pqueen (Pelin Baynazoğlu)", "Kendine Müzisyen (Kemal Can Parlak)"],
@@ -204,7 +19,7 @@ const celebrityPairs = [
     ["Zade (Furkan Civan)", "Hype (Gökay Eser)"],
     ["Anna Deniz", "Miafitz (Gözde Demiral)"],
     
-    // YouTuber'lar
+    // YouTuber'lar (Eğlence)
     ["Enes Batur", "Orkun Işıtmak"],
     ["Reynmen (Yusuf Aktaş)", "Berkcan Güven"],
     ["Kafalar (Atakan, Fatih, Bilal)", "Alper Rende"],
@@ -212,19 +27,73 @@ const celebrityPairs = [
     ["Deli Mi Ne? (Fester Abdü)", "Fırat Sobutay (OHA Diyorum)"],
     ["Meryem Can", "Başak Karahan"],
     ["Aykut Elmas", "Halil İbrahim Göker"],
+    
+    // YouTuber'lar (Bilgi & Kültür)
     ["Barış Özcan", "Ruhi Çenet"],
     ["Evrim Ağacı (Çağrı Mert Bakırcı)", "Ayhan Tarakcı"],
     ["Videoyun (Can Sungur)", "Orhun Kayaalp"],
+    ["Mendebur Lemur", "Efe Aydal"],
     
     // Instagram & TikTok Fenomenleri
     ["Danla Bilic", "Duygu Özaslan"],
     ["Cemre Solmaz", "Yaren Alaca"],
     ["Cellat36 (Özgür Deniz)", "Berke Juan"],
     ["Şeyma Subaşı", "Rachel Araz"],
-    ["Uzun Makarna (Özkan Sağın)", "Sıla Dündar"
-],
+    ["Uzun Makarna (Özkan Sağın)", "Sıla Dündar"],
+    
+    // Komedyenler ve Sunucular
+    ["Cem Yılmaz", "Ata Demirer"],
+    ["Hasan Can Kaya", "Doğu Demirkol"],
+    ["Beyazıt Öztürk", "Acun Ilıcalı"],
+    ["İbrahim Selim", "Kaan Sekban"],
+    ["Müge Anlı", "Esra Erol"],
+    ["Şahan Gökbakar", "Tolga Çevik"],
+
+    // Yemek Fenomenleri
+    ["CZN Burak", "Nusret Gökçe"],
+    ["Somer Sivrioğlu", "Danilo Zanna"],
+    ["Arda Türkmen", "Refika Birgül"],
+    
+    // === MÜZİK DÜNYASI ===
+    ["Lvbel C5", "Çakal"],
+    ["Uzi", "Reckol"],
+    ["Sefo", "Murda"],
+    ["Blok3", "Motive"],
+    ["Güneş", "Simge Sağın"],
+    ["Tarkan", "Murat Boz"],
+    ["Sezen Aksu", "Sertab Erener"],
+    ["Müslüm Gürses", "Ferdi Tayfur"],
+    ["Teoman", "Haluk Levent"],
+    ["Edis", "Buray"],
+    ["Mabel Matiz", "Emir Can İğrek"],
+    ["Gülşen", "Hande Yener"],
+    ["Melek Mosso", "Melike Şahin"],
+    
+    // === FUTBOL DÜNYASI ===
+    ["Arda Güler", "Can Uzun"],
+    ["Hakan Çalhanoğlu", "Mesut Özil"],
+    ["Kerem Aktürkoğlu", "Barış Alper Yılmaz"],
+    ["Mauro Icardi", "Edin Dzeko"],
+    ["Alex de Souza", "Gheorghe Hagi"],
+    ["Fatih Terim", "Mustafa Denizli"],
+    ["Sergen Yalçın", "Rıdvan Dilmen"],
+    ["Ricardo Quaresma", "Guti Hernández"],
+    
+    // === SİNEMA & DİZİ DÜNYASI ===
+    ["Kıvanç Tatlıtuğ", "Çağatay Ulusoy"],
+    ["Kenan İmirzalıoğlu", "Burak Özçivit"],
+    ["Hande Erçel", "Demet Özdemir"],
+    ["Serenay Sarıkaya", "Fahriye Evcen"],
+    ["Afra Saraçoğlu", "Sıla Türkoğlu"],
+    ["Beren Saat", "Tuba Büyüküstün"],
+    ["Pınar Deniz", "Cemre Baysel"],
+    ["Mert Ramazan Demir", "Kubilay Aka"],
+    ["Türkan Şoray", "Filiz Akın"],
+    ["Şener Şen", "Kemal Sunal"],
+];
 
 const games = {}; 
+const MAX_ROUNDS = 3;
 
 function handlePlayerLeave(socketId, roomId) {
     const game = games[roomId];
@@ -307,9 +176,18 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on("sending signal", payload => { io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID }); });
-    socket.on("returning signal", payload => { io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id }); });
-    socket.on('leaveRoom', ({ roomId }) => { socket.leave(roomId); handlePlayerLeave(socket.id, roomId); });
+    socket.on("sending signal", payload => {
+        io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID });
+    });
+
+    socket.on("returning signal", payload => {
+        io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
+    });
+
+    socket.on('leaveRoom', ({ roomId }) => {
+        socket.leave(roomId);
+        handlePlayerLeave(socket.id, roomId);
+    });
 
     socket.on('closeRoom', ({ roomId }) => {
         const game = games[roomId];
@@ -339,13 +217,12 @@ function calculateRoundResults(roomId) {
     const voteCounts = {};
     Object.values(game.votes).forEach(votedId => { voteCounts[votedId] = (voteCounts[votedId] || 0) + 1; });
     let mostVotedId = null; let maxVotes = 0;
-    Object.entries(voteCounts).forEach(([userId, count]) => { if (count > maxVotes) { maxVotes = count; mostVotedId = userId; } });
+    Object.entries(voteCounts).forEach(([userId, count]) => { if (count > maxVotes) { maxVotes = count; mostVotedId = userId; }});
     const playersWithMaxVotes = Object.keys(voteCounts).filter(id => voteCounts[id] === maxVotes);
     const minorityPlayer = game.players.find(p => p.id === game.minorityPlayerId);
     let roundResultData = {};
-
     if (playersWithMaxVotes.length !== 1) {
-        if (minorityPlayer) minorityPlayer.score += 10;
+        if(minorityPlayer) minorityPlayer.score += 10;
         roundResultData = { roundWinner: 'minority', minorityPlayer, votedPlayer: null, celebrityPair: game.celebrityPair };
     } else {
         const votedPlayer = game.players.find(p => p.id === mostVotedId);
@@ -357,13 +234,10 @@ function calculateRoundResults(roomId) {
             roundResultData = { roundWinner: 'minority', minorityPlayer, votedPlayer, celebrityPair: game.celebrityPair };
         }
     }
-    
     game.gameState = 'round_end';
     io.to(roomId).emit('roundEnd', { ...roundResultData, round: game.currentRound });
     io.to(roomId).emit('updateGameData', game);
-
-    const winner = game.players.find(p => p.score >= game.scoreToWin);
-    if (winner) {
+    if (game.players.some(p => p.score >= game.scoreToWin)) {
         const finalWinner = game.players.reduce((prev, current) => (prev.score > current.score) ? prev : current);
         io.to(roomId).emit('gameOver', { winner: finalWinner });
         delete games[roomId];
